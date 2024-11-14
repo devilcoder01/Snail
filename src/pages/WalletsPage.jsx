@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SnailHeading from "../components/ui/SnailHeading";
 
 const MoreWallets = () => {
   const [activeToken, setActiveToken] = useState("tokens");
@@ -43,14 +44,9 @@ const MoreWallets = () => {
 };
 
 function WalletPage() {
-
-  
   return (
     <div className="mt-16 w-full max-w-4xl mx-auto p-4">
-      <div className="Heading mb-8">
-        <h1 className="text-3xl font-bold mb-2">Snail</h1>
-        <p className="text-gray-500 mb-4">A web based wallet</p>
-      </div>
+      <SnailHeading/>
 
       <div className="flex justify-between items-center mb-6">
         <h2 className="font-bold text-xl">Wallets</h2>

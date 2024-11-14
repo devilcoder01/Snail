@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Send, Download } from "lucide-react";
 import WalletDashbord from "../components/WalletDashbord";
+import SnailHeading from "../components/ui/SnailHeading";
 
 function Home() {
   const price = "+$3 (2.60% )";
@@ -16,10 +17,7 @@ function Home() {
       <div className="">
         <div className="mt-16 w-full max-w-4xl mx-auto p-4 ">
           <div className="">
-            <div className="Heading mb-8">
-              <h1 className="text-3xl font-bold mb-2">Snail</h1>
-              <p className="text-gray-500 mb-4">A web based wallet</p>
-            </div>
+            <SnailHeading/>
 
             {/* User Balance Section */}
             <div className="balancearea mb-9 flex flex-col gap-4">
