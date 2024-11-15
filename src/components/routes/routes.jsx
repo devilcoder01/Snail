@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import SlideNavigation from "../Navbar";
+import SlideNavigation from ".././ui/Navbar";
 import Home from "../../pages/Home";
 import WalletPage from "../../pages/WalletsPage";
 import Signin from "../../pages/Setup";
@@ -15,7 +15,12 @@ export default function AllRoute({ children }) {
   const isInitialized = false;
 
   return (
-    <Router>
+    <Router
+      future={{
+        v7_relativeSplatPath: true,
+        v7_startTransition: true,
+      }}
+    >
       {!isInitialized ? <></> : <SlideNavigation />}
       {children}
       <Routes>
