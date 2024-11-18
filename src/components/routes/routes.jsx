@@ -8,11 +8,26 @@ import SlideNavigation from ".././ui/Navbar";
 import Home from "../../pages/Home";
 import WalletPage from "../../pages/WalletsPage";
 import Signin from "../../pages/Setup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { WalletAuthentication } from "../../utils/Authentication";
+
 
 export default function AllRoute({ children }) {
-  // const { isInitialized, loading } = useState();
-  const isInitialized = false;
+  const [isInitialized, setIsInitialized] = useState(false);
+  // const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Check if seedphrase exists in localStorage
+    const checkWalletInitialization = () => {
+      const seedphrase = localStorage.getItem('walletSeedPhrase');
+      console.log('Seedphrase from localStorage:', seedphrase); // This will log the seedphrase
+      setIsInitialized(!!seedphrase);
+      // setLoading(false);
+    };
+
+    checkWalletInitialization();
+  }, []);
+
 
   return (
     <Router

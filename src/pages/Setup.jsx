@@ -8,10 +8,8 @@ import { generateSeedPhrase } from "../utils";
 
 function Signin() {
   const [view, setView] = useState("initial");
-  const [isWalletCreated, setIsWalletCreated] = useState(false);
-  const [isWalletImported, SetIsWalletImported] = useState(false);
   const [seedPhrase, setSeedPhrase] = useState([]);
-  const inputRefs = useRef([]);
+  // const inputRefs = useRef([]);
   const importSeedPhrase = () => {
     setView("import");
     
@@ -27,7 +25,7 @@ function Signin() {
               <Button
                 text={"Create Wallet"}
                 type="button"
-                onClick={() => {generateSeedPhrase(setSeedPhrase, setIsWalletCreated, setView)}}
+                onClick={() => {generateSeedPhrase(setSeedPhrase, setView)}}
               />
               <Button text={"Import Wallet"} type="button" onClick={importSeedPhrase} />
             </div>

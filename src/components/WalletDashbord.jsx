@@ -12,10 +12,6 @@ function WalletDashbord() {
     { id: "nfts", label: "NFTs" },
   ];
 
-  useEffect(() => {
-    
-  })
-
   return (
     <div className="max-w-4xl mx-auto p-6 h-auto">
       <div className="mb-6">

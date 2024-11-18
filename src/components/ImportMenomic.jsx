@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { handleInputChange, handlePaste, handleNext } from "../utils";
 
+
 const ImportMemonic = () => {
   const [secretKeyArray, setSecretKeyArray] = useState(new Array(12).fill(""));
   const inputRefs = useRef([]);

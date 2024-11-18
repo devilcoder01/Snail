@@ -1,6 +1,6 @@
 // Handles individual input changes
 import { generateMnemonic, mnemonicToSeed } from "bip39";
-
+import { WalletAuthentication } from "./Authentication";
 
 export const handleInputChange = (
   secretKeyArray,
@@ -41,16 +41,16 @@ export const handleNext = (secretKeyArray, inputRefs) => {
   } else {
     const phrase = secretKeyArray;
     localStorage.setItem("walletSeedPhrase", phrase);
-    // console.log(phrase);
-    // console.log(secretKeyArray);
+    // <WalletAuthentication/>
   }
 };
 
-export const generateSeedPhrase = (setSeedPhrase, setIsWalletCreated , setView) => {
+export const generateSeedPhrase = (setSeedPhrase, setView) => {
   setView("seedPhrase");
   const phrase = generateMnemonic();
   const words = phrase.split(" ");
   setSeedPhrase(words);
-  setIsWalletCreated(true);
   localStorage.setItem("walletSeedPhrase", phrase);
 };
+
+
