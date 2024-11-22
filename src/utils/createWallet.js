@@ -5,7 +5,7 @@ import { deriveSolanaKeypair, deriveSolanaPrivateKey } from "./services.js";
 class CryptoWallet {
   constructor(index) {
     this.seedPhrase =
-      "9d1bb30d9915702b42118ef19a8bafa4c3949763c211cd29612d8bfc44fd26fd55be14c410b8bda26fb559b33820dd318add648818b0864a3530d9027d728754";
+      "";
     this.SolderivePath = `m/44'/501'/${index}'/0'`;
     this.EthederivePath = `m/44'/60'/${index}'/0'`;
   }
@@ -43,11 +43,3 @@ class CryptoWallet {
   }
 }
 
-// export default CryptoWallet
-
-(async function main() {
-  let w = await new CryptoWallet(0);
-
-  let wallet = w.solana.publicKey;
-  console.log(wallet);
-})();

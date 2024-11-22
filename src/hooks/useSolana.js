@@ -1,7 +1,7 @@
 import SolanaService from '../services/solana';
 import { useState } from 'react';
 
-const solanaService = new SolanaService('mainnet-beta'); // or 'devnet' for testing
+const solanaService = new SolanaService('devnet'); // or 'devnet' for testing
 
 export const useSolana = () => {
   const [balance, setBalance] = useState(0);
@@ -12,9 +12,8 @@ export const useSolana = () => {
   // Use these methods in your components
   const refreshBalance = async (publicKey) => {
     try {
-      const lamports = await solanaService.getBalance(publicKey); // Assuming lamports are returned
-      const solBalance = parseFloat(lamports / 1_000_000_000); // Convert lamports to SOL
-      setBalance(solBalance);
+      const lamports = await solanaService.getBalance(publicKey); // Assuming lamports are returned// Convert lamports to SOL
+      setBalance(lamports);
     } catch (error) {
       console.error('Error fetching balance:', error);
       setBalance(0); // Default to 0 if there's an error

@@ -11,8 +11,7 @@ import {
     getAssociatedTokenAddress, 
     createTransferInstruction 
   } from '@solana/spl-token';
-//   import { Metadata } from '@metaplex-foundation/mpl-token-metadata';
-//   import { Programs } from '@metaplex/js';
+
   
   class SolanaService {
     constructor(network = 'devnet') {
@@ -25,6 +24,7 @@ import {
      * @param {string} publicKey - Wallet public key
      * @returns {Promise<number>} Balance in SOL
      */
+
     async getBalance(publicKey) {
       try {
         const pubKey = new PublicKey(publicKey);
@@ -233,23 +233,6 @@ import {
       }
     }
   
-    /**
-     * Helper method to extract transaction amount
-     * @private
-     */
-    // private extractTransactionAmount(transaction) {
-      // Implementation to extract amount from transaction
-      // This will vary based on transaction type (SOL transfer, token transfer, etc.)
-    // }
-  
-    /**
-     * Helper method to determine transaction type
-     * @private
-     */
-    // private determineTransactionType(transaction, userPublicKey) {
-      // Implementation to determine if transaction is send/receive/other
-      // Compare transaction addresses with user's public key
-    // }
   }
   
   export default SolanaService;

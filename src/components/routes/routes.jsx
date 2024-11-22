@@ -20,7 +20,7 @@ export default function AllRoute({ children }) {
     // Check if seedphrase exists in localStorage
     const checkWalletInitialization = () => {
       const seedphrase = localStorage.getItem('walletSeedPhrase');
-      console.log('Seedphrase from localStorage:', seedphrase); // This will log the seedphrase
+      // console.log('Seedphrase from localStorage:', seedphrase); // This will log the seedphrase
       setIsInitialized(!!seedphrase);
       // setLoading(false);
     };
