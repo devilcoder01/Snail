@@ -34,7 +34,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
     "stream-browserify": "^3.0.0",
-    "vite-plugin-node-polyfills": "^0.22.0"
+    "vite-plugin-node-polyfills": "^0.22.0",
+    "web-streams-node": "^0.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

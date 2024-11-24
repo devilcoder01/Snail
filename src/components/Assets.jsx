@@ -1,24 +1,10 @@
-import { useState, useEffect } from 'react';
-import getEthBalances from '../utils/GetEthTokens';
+import { useState, useEffect, useContext } from 'react';
 import AssetItem from './AssteItem';
+import TokensContexts from './context/AssetTokens';
+
 
 const AssetSection = () => {
-  // const SolpublicKey = "9XaXs4Ds8VCpuU6hjN1fKvnYv13EWCeuupejwSqkxDA4";
-  const EthPublicKey = "0xeF5c67E6dBb6Fd6CfB9C93ADbc5801bcfc10c494";
-  const [assets, setAssets] = useState([]);
-
-  useEffect(() => {
-    const fetchAssets = async () => {
-      try {
-        const { tokens } = await getEthBalances(EthPublicKey);
-        setAssets(tokens);
-      } catch (error) {
-        console.error('Error fetching assets:', error);
-      }
-    };
-
-    fetchAssets();
-  }, []);
+  const assets = useContext(TokensContexts)
 
   return (
     <div className="w-auto max-w-4xl mx-auto p-2 ">

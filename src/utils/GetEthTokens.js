@@ -1,48 +1,61 @@
 import { Alchemy, Network } from "alchemy-sdk";
-import { ethers } from "ethers";
 
 const config = {
   apiKey: "VzR6_MduUElR5YcR7PN94LWmJjVwZvNR",
-  network: Network.ETH_MAINNET, 
+  network: Network.ETH_MAINNET,
 };
 
 const getEthBalances = async (address) => {
   try {
-    // Update the network dynamically based on the input
-    const alchemyConfig = config  ;
-    const alchemy = new Alchemy(alchemyConfig);
+    const alchemy = new Alchemy(config);
 
-    // Get the native coin balance (e.g., ETH or MATIC, depending on the network)
-    // const nativeBalanceWei = await alchemy.core.getBalance(address);
-    // const nativeBalance = ethers.utils.formatEther(nativeBalanceWei);
-
-    // Get token balances
+    // Step 1: Get token balances
     const balances = await alchemy.core.getTokenBalances(address);
 
     // Filter tokens with non-zero balance
-    const nonZeroBalances = balances.tokenBalances.filter((token) => parseInt(token.tokenBalance) > 0);
-    const tokenDetails = [];
-    for (let token of nonZeroBalances) {
-      const metadata = await alchemy.core.getTokenMetadata(token.contractAddress);
-      
-      let balance = token.tokenBalance / Math.pow(10, metadata.decimals).toFixed(2);
-      tokenDetails.push({
-        name: metadata.name,
-        symbol: metadata.symbol,
-        balance: balance,
-        logo : metadata.logo,
-      });
-    }
+    const nonZeroBalances = balances.tokenBalances.filter(
+      (token) => parseInt(token.tokenBalance) > 0
+    );
 
-    // Return the native balance and token balances
+    // Step 2: Fetch metadata and prices in parallel
+    const tokenDetails = await Promise.all(
+      nonZeroBalances.map(async (token) => {
+        const metadata = await alchemy.core.getTokenMetadata(token.contractAddress);
+
+        // Fetch token price (with fallback)
+        let tokenPrice = null;
+        try {
+          const priceData = await alchemy.prices.getTokenPriceByAddress([
+            { network: "eth-mainnet", address: token.contractAddress },
+          ]);
+          tokenPrice = priceData.data[0]?.prices[0]?.value || null;
+        } catch (error) {
+          console.warn(`Price not available for token: ${metadata.symbol}`, error);
+        }
+
+        // Calculate the token balance in human-readable format
+        const balance = (parseInt(token.tokenBalance) / Math.pow(10, metadata.decimals)).toFixed(2);
+
+        return {
+          name: metadata.name,
+          symbol: metadata.symbol,
+          balance: balance,
+          price: tokenPrice,
+          logo: metadata.logo,
+          contractAddress: token.contractAddress,
+        };
+      })
+    );
+
     return {
       tokens: tokenDetails,
     };
   } catch (error) {
-    console.error("Error fetching balances:", error);
+    console.error("Error fetching balances:", error.message);
     throw error;
   }
 };
 
+// Example Usage
 export default getEthBalances;
 

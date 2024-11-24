@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import AssetSection from "../components/Assets";
 import AddressDisplay from "./NetworkSelctor";
+import Transections from "./Transections";
+import Nfts from "./Nfts";
 
 
 function WalletDashbord() {
@@ -34,7 +36,19 @@ function WalletDashbord() {
           {/* <AddressDisplay/> */}
         </div>
       </div>
-      <AssetSection />
+      {(() => {
+        switch (activeTab) {
+          case 'tokens':
+            return <AssetSection />
+          case 'transactions':
+            return <Transections/>
+          case 'nfts':
+            return <Nfts/>  
+          default:
+            return  <AssetSection />
+        }
+      })()}
+      
     </div>
   );
 }
